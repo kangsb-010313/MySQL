@@ -86,3 +86,6 @@ select  first_name, last_name,
 		concat(first_name, ' ', last_name) as '전체-이름',
         concat(first_name, ' ', last_name, ' 입사일은 ', hire_date, ' 입니다.') as 문장 	-- 강수빈 입사일은 2025-05-22 입니다.
 from employees;
+
+-- 전체직원의 정보를 다음과 같이 출력하세요
+
