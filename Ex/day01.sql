@@ -94,3 +94,24 @@ select  concat(first_name, '-', last_name) as 성명,
 		salary*12+5000 as 보너스,
 		phone_number as 전화번호
 from employees;
+
+-- 테이블의 컬럼명테이블의 데이터,  문자열,숫자는 그대로 출력 
+select  first_name
+		,salary 
+        ,'(주)개발자' as company
+        ,3+5 as no
+from employees;
+
+-- * MySQL은 테이블명을 생략할 수 있다. (오라클은 불가능)* 
+select  '(주)개발자' as company
+from employees;		-- employees 테이블의 데이터가 107개
+
+select '(주)개발자' 
+from dual; 			-- 데이터가 없는 가상의 테이블
+
+select now() as 현재시간
+from dual;			-- 가상의 테이블 사용 
+
+select now() as 현재시간 -- from절을 생략할 수 있음 (오라클에서는 안됨)
+
+
