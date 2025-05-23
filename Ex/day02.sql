@@ -161,5 +161,140 @@ from employees
 where first_name like '__a_'
 ;
 
+-- *NULL (is null, is not null)-----------------------------
+
+/* 자바에서의 null
+스태틱 
+---------------------------------
+스택 int a 		point p
+		[0]--> 값	[null]--> 주소가 없다
+---------------------------------
+힙 						new{}
+
+*/
+
+-- 부서가 없는 사람의 이름과 부서번호를 출력하세요
+-- is
+select  first_name
+		,department_id
+from employees
+where department_id is null
+;
+
+-- 부서가 있는 사람의 이름과 부서번호를 출력하세요 
+-- is not null
+select  first_name
+		,department_id
+from employees
+where department_id is not null
+;
+
+select  first_name
+		,salary
+        ,commission_pct
+        ,salary*commission_pct
+        ,salary*commission_pct+200
+from employees
+;
+
+-- 커미션비율이 있는 사원의 이름과 월급 커미션비율을 출력하세요
+select  first_name 이름
+		,salary 월급
+		,commission_pct 커미션비율
+from employees
+where commission_pct is not null
+;
+
+-- 담당매니저가 없고 커미션비율이 없는 직원의 이름과 매니저아이디 커미션 비율을 출력하세요
+-- 담당매니저가 없고 		manager_id is null
+-- 커미션 비율이 없는 직원 	commission_pct is null
+-- 조건을 동시에 만족 and &&
+select  first_name 이름
+		,manager_id 매니저아이디 
+        ,commission_pct 커미션비율 
+from employees
+where manager_id is null
+and commission_pct is null
+;
+
+-- 부서가 없는 직원의 이름과 월급을 출력하세요
+select  first_name
+		,salary
+from employees
+where department_id is null
+;
+
+-- 월급이 6000 이상 10000 이하인 직원 중 커미션비율이 없는 직원의 
+-- 이름 월급 커미션 비율을 출력하세요
+select  first_name 이름
+		,salary 월급
+        ,commission_pct 커미션비율
+from employees
+where salary >=6000
+and salary <= 10000
+and commission_pct is null
+;
 
 
+-- --------------------------------------
+-- order by 절(정렬) 
+-- --------------------------------------
+
+-- *order by 절을 사용해 보기 좋게 정렬하기 -------------------------
+-- 오름차순(작 --> 큰) :  asc
+-- 내림차순(큰 --> 작) : desc
+
+-- 직원의 이름과 월급을 월급이 많은 직원부터 출력하세요 (큰 --> 작 : 내림차순)
+select  first_name
+		,salary
+from employees
+order by salary desc
+;
+
+-- 월급이 9000이상인 직원의 이름과 월급을 월급이 작은 직원부터 출력하세요
+select  first_name
+		,salary
+from employees
+where salary >= 9000
+order by salary asc
+;
+
+-- 부서번호를 오름차순으로 정렬하고 부서번호, 월급, 이름을 출력하세요
+select  department_id 부서번호
+		,salary 월급
+		,first_name 이름
+from employees
+order by department_id asc
+;
+
+-- 월급이 10000 이상인 직원의 이름 월급을 월급이 큰직원부터 출력하세요
+select  first_name 이름
+		,salary 월급
+from employees
+where salary >= 10000
+order by salary desc
+;
+
+-- 직원의 이름, 급여, 입사일을 이름의 알파벳 올림차순으로 출력하세요
+select  first_name 이름
+		,salary 급여 
+		,hire_date 입사일 
+from employees
+order by first_name asc
+;
+
+-- 직원의 이름, 급여, 입사일을 입사일이 빠른 사람 부터 출력하세요
+select  first_name 이름
+		,salary 급여
+        ,hire_date 입사일
+from employees
+order by hire_date asc
+;
+
+-- 부서번호를 오름차순으로 정렬하고 부서번호가 같으면 월급이 높은 사람부터 부서번호 월급 이름을 출력하세요  
+select department_id 부서번호
+		,salary 월급
+        ,first_name 이름
+from employees
+order by department_id asc, salary desc
+;
