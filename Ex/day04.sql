@@ -187,11 +187,55 @@ and department_id >= 100 -- 100 이상만
 -- and hire_date > 2001/01/01 -- 쓸 수 없음
 ;
 
+/*
+-- ------------------------------------------------
+select  department_id
+from employees
+where and, or
+-- --------
+group by department_id
+having and
+-- --------
+order by 
+;
+*/
 
-select  *
+
+-- --------------------------------------
+-- *if~else 문 (조건문, 참일 때, 거짓일 때
+-- --------------------------------------
+-- 모든 직원의 이름, 월급, 수당, 상태(state)을 출력하세요
+-- 상태컬럼은 수당이 없으면 0, 수당이 있으면 1 을 state 컬럼에 표시하세요 
+select  이름 월급 수당 상태? 0 1
+from 직원
+;
+select  first_name
+		,salary
+        ,commission_pct
+        ,if(commission_pct is null, '사무직', '영업사원') as 'if()'
+        ,ifnull(commission_pct, '없음') as 'ifnull()'
+        /*
+        if(commission_pct != null){
+			return 1;
+		} else {
+			return 0;
+		}
+        */
 from employees
 ;
 
+/*
+직원아이디, 월급, 업무아이디, 실제월급(realSalary)을 출력하세요.
+ 실제월급은 job_id 가 'AC_ACCOUNT' 면 월급+월급*0.1,
+ 'SA_REP' 월급+월급*0.2,   'ST_CLERK' 면 월급+월급*0.3
+ 그외에는 월급으로  계산하세요
+*/
+
+select  job_id
+		,salary
+        ,salary -- 복잡한 if else문으로 표시 --> 실제월급 *
+from employees
+;
 
 
 

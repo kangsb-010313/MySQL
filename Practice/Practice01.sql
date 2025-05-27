@@ -21,7 +21,8 @@ order by hire_date asc
 문제2.
 업무(jobs)별로 업무이름(job_title)과 최고월급(max_salary)을 월급의 내림차순(DESC)로 정렬하세요.
 */
-select  *
+select  job_title
+		,max_salary
 from jobs
 order by max_salary desc
 ;
