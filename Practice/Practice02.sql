@@ -121,16 +121,13 @@ order by avg(salary) desc
 정렬은 입사일로 오름차순으로 정렬합니다.
 */
 select  hire_date
-		,case when hire_date <= '2002/12/31' then 창립멤버
-			  when hire_date > '2002/12/31' and hire_date <= '2003/12/31' then 03년입사
-              when hire_date > '2003/12/31' and hire_date <= '2004/12/31' then 04년입사
+		,case when hire_date <= '2002/12/31' then '창립멤버'
+			  when hire_date > '2002/12/31' and hire_date <= '2003/12/31' then '03년입사'
+              when hire_date > '2003/12/31' and hire_date <= '2004/12/31' then '04년입사'
 			 else '상장이후입사' 
 		end optDate
 from employees
-;
-select hire_date
-from employees
-where hire_date <= '2002/12/31'
+order by hire_date asc
 ;
 
 
@@ -139,6 +136,14 @@ where hire_date <= '2002/12/31'
 가장 오래 근속한 직원의 입사일은 언제인가요? 다음 형식으로 출력해주세요.
 예) 2005년 08월 20일(토요일)
 */
+/*
+* dayofweek() --> 특정날짜의 요일을 숫자로 반환
+SELECT DAYOFWEEK('2025-05-27') AS 요일번호;
+*/
+select  dayofweek(min(hire_date))
+		,date_format(min(hire_date), '%Y년 %m월 %d일(토요일)')
+from employees
+;
 
 
 
