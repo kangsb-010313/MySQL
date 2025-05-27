@@ -125,6 +125,38 @@ from employees
 group by department_id -- 그룹합치기
 ;
 
+
+-- 부서별로 부서 번호와 최고월급, 최고월급을 받는 직원의 이름을 출력하세요
+-- Group by에 참여한 컬럼이나 그룹함수만 올 수 있다.
+select  department_id
+		,max(salary)
+        ,first_name
+from employees
+group by department_id
+;
+
+-- 부서별 월급 합계, 부서 job_id별 인원수 
+-- 그룹 나누는 첫 번째 기준 department_id, 그 안에서 서브(두번째) 그룹을 job_id로 
+select  department_id
+		,job_id
+		,sum(salary)
+        ,count(*)
+from employees
+group by department_id, job_id -- 1차 그룹, 2차 그룹(서브 그룹)
+order by department_id asc
+;
+
+-- 비교
+select  department_id
+		,job_id
+        ,first_name -- 그룹에 참여하지 않은 컬럼명은 사용할 수 없다
+		,sum(salary)
+        ,count(*)
+from employees
+group by department_id, job_id 
+order by department_id asc
+;
+-- ------------------------------------------------------------------------------
 -- 부서별로 부서 번호와 인원수, 월급 합계를 출력하세요
 select  department_id
 		,count(*)
@@ -132,22 +164,33 @@ select  department_id
 from employees
 group by department_id
 ;
-
+-- --------------------------------------
+-- *having 절 
+-- --------------------------------------
 -- 월급(salary)의 합계가 20000 이상인 부서의 부서 번호와 , 인원수, 월급합계를 출력하세요
 select  department_id
 		,count(*)
 		,sum(salary)
 from employees
-group by department_id  
+group by department_id
+having sum(salary) >= 20000 -- having절에는 그룹함수와 group by에 참여한 컬럼만 사용할 수 있다.
 ;
+-- 월급(salary)의 합계가 20000 이상이고 부서번호가 100번 이상인 부서의 부서 번호와 , 인원수, 월급합계를 출력하세요
+-- having 절
+select  department_id
+		,count(*)
+		,sum(salary)
+from employees
+group by department_id
+having sum(salary) >= 20000 -- having절에는 그룹함수와 group by에 참여한 컬럼만 사용할 수 있다.
+and department_id >= 100 -- 100 이상만 
+-- and hire_date > 2001/01/01 -- 쓸 수 없음
+;
+
 
 select  *
 from employees
 ;
-
-
-
-
 
 
 
