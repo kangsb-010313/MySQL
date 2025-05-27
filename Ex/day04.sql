@@ -209,6 +209,8 @@ order by
 select  이름 월급 수당 상태? 0 1
 from 직원
 ;
+--  IF ~ ELSE 문 : IF(조건문, 참일때값, 거짓일때값)
+-- IFNULL(컬럼명, null일때값): 컬럼의 값이 null일때 정해진값을 출력
 select  first_name
 		,salary
         ,commission_pct
@@ -224,6 +226,7 @@ select  first_name
 from employees
 ;
 
+-- CASE ~ END 문: if~else if~else if~else
 /*
 직원아이디, 월급, 업무아이디, 실제월급(realSalary)을 출력하세요.
  실제월급은 job_id 가 'AC_ACCOUNT' 면 월급+월급*0.1,
@@ -253,8 +256,8 @@ from employees
 select  first_name
 		,department_id
         ,case when department_id >= 10 and department_id <= 50 then 'A-TEAM'
-			 when department_id >= 60 and department_id <= 100 then 'B-TEAM'
-             when department_id >= 110 and department_id <= 150 then 'C-TEAM'
+			  when department_id >= 60 and department_id <= 100 then 'B-TEAM'
+              when department_id >= 110 and department_id <= 150 then 'C-TEAM'
 			 else '팀없음'
         end team
 from employees
