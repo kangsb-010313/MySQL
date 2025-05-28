@@ -212,13 +212,106 @@ where e.salary = l.location_id
 -- ------------------------------------------------------------------------------
 # 조인 연습(equi join, inner join 두가지로 풀어볼것)
 -- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+from employees e, departments d, locations l
+where  e.department_id = d.department_id
+and d.location_id = l.location_id
+;
+
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+from employees e 
+inner join departments d 
+	on e.department_id = d.department_id
+inner join locations l
+	on d.location_id = l.location_id
+;
    
 -- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명, 나라아이디, 나라명
-   
-   
+select  e.employee_id
+		,e.first_name
+		,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+        ,c.country_id
+        ,c.country_name
+from employees e, departments d, locations l, countries c
+where e.department_id = d.department_id
+and d.location_id = l.location_id
+and l.country_id = c.country_id
+;
+
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+        ,c.country_id
+        ,c.country_name
+from employees e 
+inner join departments d
+	on e.department_id = d.department_id
+inner join locations l 
+	on d.location_id = l.location_id
+inner join countries c
+	on l.country_id = c.country_id
+;
+
 -- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명, 나라아이디, 나라명, 지역아이디, 지역명
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+        ,c.country_id
+        ,c.country_name
+        ,r.region_id
+        ,r.region_name
+from employees e, departments d, locations l, countries c, regions r
+where e.department_id = d.department_id
+and d.location_id = l.location_id
+and l.country_id = c.country_id
+and c.region_id = r.region_id 
+;
 
-
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_id
+        ,d.department_name
+        ,l.location_id
+        ,l.city
+        ,c.country_id
+        ,c.country_name
+        ,r.region_id
+        ,r.region_name
+from employees e 
+inner join departments d
+	on e.department_id = d.department_id
+inner join locations l 
+	on d.location_id = l.location_id
+inner join countries c
+	on l.country_id = c.country_id
+inner join regions r
+	on c.region_id = r.region_id
+;
 
 
 
