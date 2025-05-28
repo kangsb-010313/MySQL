@@ -137,7 +137,7 @@ left outer join departments d -- 왼쪽 테이블을 기준으로 (null버리지
 
 -- *right outer join ----------------------------------------------------------------------
 -- • 모든 직원의 부서번호, 이름, 부서번호를 출력하세요
--- • 직원이 없는 부서도 표시 (오른쪽 기준으로 했기 때문에 Kimberely는 빠짐)
+-- • 직원이 없는 부서도 표시 (오른쪽 기준으로 했기 때문에 Kimberely는 결과에 없다)
 select  e.first_name
 		,d.department_id
         ,d.department_name
@@ -156,19 +156,69 @@ left outer join employees e
 	on d.department_id = e.department_id
 ;
 
+-- *union : full outer join---------------------------------------------------
+-- 중복 한 번만 적용
+-- 컬럼명과 갯수가 같아야함 
+(-- left join : 왼쪽 기준
+select  e.employee_id
+		,first_name
+		,d.department_id
+        ,d.department_name
+from employees e
+left outer join departments d
+	on e.department_id = d.department_id
+)
+union -- 한 번에 쭉 짜지 않고 왼 오 각자 짠 후 테스트 해보고 합쳐서 많이 짬
+(-- right join : 오른쪽 기준
+select   e.employee_id
+		,e.first_name
+		,d.department_id
+        ,d.department_name
+from employees e
+right outer join departments d
+	on e.department_id = d.department_id
+);
 
 
-
-
-
-
-
-
-select *
-from employees
+-- *self join -------------------------------------------------------------------
+-- 테이블에서 자신의 pk를 fk로 가지고 있는 경우
+-- 같은 테이블을 두 번 불러와서 써야되는 경우 
+-- 두 번 불러와서 별명을 다르게 준다 (꼭 별명을 주어야 함)
+select  *
+from employees e, employees m
 ;
--- --------------------------------------
--- *
--- --------------------------------------
+-- ---------------------------------------------
+select  e.employee_id
+		,e.first_name
+		,e.phone_number
+        ,m.employee_id m_id
+        ,m.first_name m_first_name
+        ,m.phone_number m_phone_number
+from employees e, employees m
+where e.manager_id = m.employee_id
+;
+
+-- 잘못된 join -------------------------------------------------------------------
+-- 아무 의미 없는 데이터가 연결이 되는 경우 
+-- 아무 컬럼이나 where에 사용하면 안됨
+-- 월급과 도시는 아무런 관계가 없음
+select  *
+from employees e, locations l
+where e.salary = l.location_id
+;
+
+
+
+-- ------------------------------------------------------------------------------
+# 조인 연습(equi join, inner join 두가지로 풀어볼것)
+-- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명
+   
+-- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명, 나라아이디, 나라명
+   
+   
+-- 직원아이디, 이름, 월급, 부서아이디, 부서명, 도시아이디, 도시명, 나라아이디, 나라명, 지역아이디, 지역명
+
+
+
 
 
