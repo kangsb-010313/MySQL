@@ -156,6 +156,37 @@ and j.job_id = 'AC_ACCOUNT'
 그리고 지역구분(regions)의 이름(resion_name)까지 전부 출력해 보세요.
 (11건)
 */
+-- departments, employees e , locations , countries , regions 
+
+select  d.department_id,
+		d.department_name,
+		e.first_name,
+		l.city,
+		c.country_name,
+		r.region_name
+from departments d, employees e, locations l, countries c, regions r
+where d.manager_id = e.employee_id
+and d.location_id = l.location_id
+and l.country_id = c.country_id
+and c.region_id = r.region_id
+;
+
+select  d.department_id,
+		d.department_name,
+		e.first_name,
+		l.city,
+		c.country_name,
+		r.region_name
+from departments d
+inner join employees e 
+	on d.manager_id = e.employee_id
+inner join locations l 
+	on d.location_id = l.location_id
+inner join countries c 
+	on l.country_id = c.country_id
+inner join regions r 
+	on c.region_id = r.region_id;
+;
 
 
 /*
@@ -165,6 +196,16 @@ and j.job_id = 'AC_ACCOUNT'
 매니저가 없는 Steven도 표시합니다.
 (107명)
 */
+select  e.employee_id
+		,e.first_name
+        ,d.department_name
+        ,m.first_name manager_fname
+from employees e
+left outer join employees m
+	on e.manager_id = m.employee_id
+left outer join departments d
+	on e.department_id = d.department_id
+;
 
 
 /*
@@ -173,7 +214,16 @@ and j.job_id = 'AC_ACCOUNT'
 매니저가 없는 Steven은 표시하지 않습니다.
 (106명)
 */
-
+select  e.employee_id
+		,e.first_name
+        ,d.department_name
+        ,m.first_name manager_fname
+from employees e
+left outer join departments d
+	on e.department_id = d.department_id
+inner join employees m
+	on e.manager_id = m.employee_id
+;
 
 /*
 문제9-2.
@@ -181,3 +231,13 @@ and j.job_id = 'AC_ACCOUNT'
 매니저가 없는 Steven은 표시하지 않습니다.
 (105명)
 */
+select e.employee_id
+		,e.first_name
+        ,d.department_name
+        ,m.first_name manager_fname
+from employees e
+inner join employees m
+	on e.manager_id = m.employee_id
+inner join departments d
+	on e.department_id = d.department_id
+;
