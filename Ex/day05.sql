@@ -124,6 +124,41 @@ inner join jobs j
 -- --------------------------------------
 
 -- *left outer join ----------------------------------------------------------------------
+-- 왼쪽 테이블을 기준, 기준테이블의 정보는 다 보여줌
+-- Kimberely(소속 부서가 없는 직원)가 결과에 있어야 함
+select  e.first_name
+		,d.department_name
+        ,e.department_id
+        ,d.department_id
+from employees e
+left outer join departments d -- 왼쪽 테이블을 기준으로 (null버리지 말자)
+	on e.department_id = d.department_id -- 107개
+;
+
+-- *right outer join ----------------------------------------------------------------------
+-- • 모든 직원의 부서번호, 이름, 부서번호를 출력하세요
+-- • 직원이 없는 부서도 표시 (오른쪽 기준으로 했기 때문에 Kimberely는 빠짐)
+select  e.first_name
+		,d.department_id
+        ,d.department_name
+from employees e 
+right outer join departments d
+	on e.department_id = d.department_id 
+;
+
+-- *right outer join -> left outer join ---------------------------------------
+select  e.first_name
+        ,d.department_name
+        ,e.department_id ed
+		,d.department_id dd
+from departments d
+left outer join employees e
+	on d.department_id = e.department_id
+;
+
+
+
+
 
 
 
