@@ -1,8 +1,17 @@
 /*
 문제1.
-직원들의 사번(employee_id), 이름(firt_name), 성(last_name)과 부서명(department_name)을 조회하여 부서이름(department_name) 오름차순, 사번(employee_id) 내림차순 으로 정렬하세요.
+직원들의 사번(employee_id), 이름(firt_name), 성(last_name)과 부서명(department_name)을 조회하여 
+부서이름(department_name) 오름차순, 사번(employee_id) 내림차순 으로 정렬하세요.
 (106건)
 */
+select  e.employee_id
+		,e.first_name
+        ,e.last_name
+        ,d.department_name
+from employees e, departments d
+where e.department_id = d.department_id
+order by d.department_name asc, e.employee_id desc
+;
 
 
 /*
@@ -13,13 +22,34 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 부서가 없는 Kimberely(사번 178)은 표시하지 않습니다.
 (106건)
 */
-
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_name
+        ,j.job_title
+from employees e, departments d, jobs j
+where e.department_id = d.department_id
+and e.job_id = j.job_id
+order by j.job_title asc
+;
 
 /*
 문제2-1.
 문제2에서 부서가 없는 Kimberely(사번 178)까지 표시해 보세요
 (107건)
 */
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,d.department_name
+        ,j.job_title
+from employees e
+left outer join departments d
+	on e.department_id = d.department_id
+left outer join jobs j
+	on e.job_id = j.job_id
+order by j.job_title asc
+;
 
 
 /*
@@ -29,20 +59,41 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 부서가 없는 도시는 표시하지 않습니다.
 (27건)
 */
-
+select  l.location_id
+		,l.city
+        ,d.department_name
+        ,d.department_id
+from departments d, locations l
+where d.location_id = l.location_id
+order by l.location_id asc
+;
 
 /*
 문제3-1.
 문제3에서 부서가 없는 도시도 표시합니다. 
 (43건)
 */
-
+select  l.location_id
+		,l.city
+        ,d.department_name
+        ,d.department_id
+from departments d
+right outer join locations l
+	on d.location_id = l.location_id
+order by l.location_id asc
+;
 
 /*
 문제4.
 지역(regions)에 속한 나라들을 지역이름(region_name), 나라이름(country_name)으로 출력하되 지역이름(오름차순), 나라이름(내림차순) 으로 정렬하세요.
 (25건)
 */
+select  r.region_name
+		,c.country_name
+from regions r, countries c
+where r.region_id = c.region_id
+order by r.region_name asc, c.country_name desc
+;
 
 
 /*
@@ -51,7 +102,15 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 사번(employee_id), 이름(first_name)과 채용일(hire_date), 매니저이름(first_name), 매니저입사일(hire_date)을 조회하세요.
 (37건)
 */
-
+select  e.employee_id
+		,e.first_name
+		,e.hire_date
+        ,m.first_name
+        ,m.hire_date
+from employees e, employees m
+where e.manager_id = m.employee_id
+and e.hire_date < m.hire_date
+;
 
 /*
 문제6.
@@ -60,6 +119,17 @@ employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습�
 값이 없는 경우 표시하지 않습니다.
 (27건)
 */
+select  c.country_name
+		,c.country_id
+        ,l.city
+        ,l.location_id
+        ,d.department_name
+        ,d.department_id
+from countries c, locations l, departments d
+where c.country_id = l.country_id
+and l.location_id = d.location_id
+order by c.country_name asc
+;
 
 
 /*
@@ -69,12 +139,21 @@ job_history 테이블은 과거의 담당업무의 데이터를 가지고 있다
 이름은 first_name과 last_name을 합쳐 출력합니다.
 (2건)
 */
-
+select  j.employee_id
+		,concat(e.first_name, '-', e.last_name)
+        ,j.job_id
+        ,j.start_date
+        ,j.end_date
+from job_history j, employees e
+where j.job_id = e.job_id
+and j.job_id = 'AC_ACCOUNT'
+;
 
 /*
 문제8.
 각 부서(department)에 대해서 부서번호(department_id), 부서이름(department_name), 
-매니저(manager)의 이름(first_name), 위치(locations)한 도시(city), 나라(countries)의 이름(countries_name) 그리고 지역구분(regions)의 이름(resion_name)까지 전부 출력해 보세요.
+매니저(manager)의 이름(first_name), 위치(locations)한 도시(city), 나라(countries)의 이름(countries_name) 
+그리고 지역구분(regions)의 이름(resion_name)까지 전부 출력해 보세요.
 (11건)
 */
 
