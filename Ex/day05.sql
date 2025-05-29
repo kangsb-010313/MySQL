@@ -179,6 +179,29 @@ right outer join departments d
 	on e.department_id = d.department_id
 );
 
+select count(*)
+from
+(
+	-- left join : 왼쪽 기준
+	select  -- e.employee_id
+			first_name
+			,d.department_id
+			,d.department_name
+	from employees e
+	left outer join departments d
+		on e.department_id = d.department_id
+	
+	union -- 한 번에 쭉 짜지 않고 왼 오 각자 짠 후 테스트 해보고 합쳐서 많이 짬
+	-- right join : 오른쪽 기준
+	select   -- e.employee_id
+			e.first_name
+			,d.department_id
+			,d.department_name
+	from employees e
+	right outer join departments d
+		on e.department_id = d.department_id
+	
+)t;
 
 -- *self join -------------------------------------------------------------------
 -- 테이블에서 자신의 pk를 fk로 가지고 있는 경우
