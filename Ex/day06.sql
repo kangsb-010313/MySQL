@@ -216,7 +216,7 @@ where salary >all (select  salary
 ;
 
 -- ------------------------------------------------
-# SubQuery   where절 vs 테이블
+# *SubQuery   where절 vs 테이블
 -- ------------------------------------------------
 -- #where절로 해결
 
@@ -273,7 +273,7 @@ select  department_id,
 		max(salary) maxSalary   -- 별명을 왜 주었는지 생각해 볼것
 from employees
 group by department_id
-;
+; 
 /*결과 일부
 (10, 4400)
 (20, 13000)
@@ -303,3 +303,152 @@ from employees e, (select  department_id,
 where e.department_id = s.department_id
 and e.salary = s.maxSalary
 ;
+
+
+-- ------------------------------------------------
+# *limit
+-- ------------------------------------------------
+
+-- 직원관리 페이지  ---------------------------------------------------------
+-- 사번이 작은 직원이 위쪽에 출력(요구사항에 있었음)
+-- > 자동으로 정렬되더라도(믿으면 안됨) 꼭 order by 절로 정렬해줘야함
+-- *1페이지의 데이터만 가져오기(1페이지에 5개)
+/*
+(0, 5)  --> 1번부터 5개 
+(5, 10)  --> 6번부터 5개  
+(10, 10)  --> 11번부터 5개  
+*/ 
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 0,5 			-- 1번째부터 5개
+;
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 5,5 			-- 6번째부터 5개 
+;
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 10,5			 -- 10번째부터 5개 
+;
+-- 0 생략 ---------------------------------------------------------
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 7			-- 처음부터 7개
+;
+
+-- 다른표현 limit offset --------------------------------------------
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 5 offset 0 -- 1번째부터 5개
+;
+select 	employee_id,
+		first_name,
+        salary
+from employees
+order by employee_id asc
+limit 5 offset 5      -- 6번째부터 5개
+;
+select  employee_id
+		,first_name
+        ,salary
+from employees
+order by employee_id asc 
+limit 5 offset 10 -- 11번째부터 5개 
+;
+
+-- 07년에 입사한 직원중 급여가 많은 직원중 3에서 7등의 이름 급여 입사일은? --------------------------------------
+-- 2007년 입사자만 조회 
+select  *
+from employees
+where hire_date >= '07/01/01'
+and hire_date <= '07/12/31'
+;
+-- 월급이 큰 사람부터 내림차순 정렬 
+select  *
+from employees
+where hire_date >= '07/01/01'
+and hire_date <= '07/12/31'
+order by salary desc
+;
+-- 3번째(~7번째)부터 5명 출력
+select  *
+from employees
+where hire_date >= '07/01/01'
+and hire_date <= '07/12/31'
+order by salary desc
+limit 2,5
+;
+-- 출력 컬럼 결정 
+select  first_name
+		,salary
+        ,hire_date
+from employees
+where hire_date >= '07/01/01'
+and hire_date <= '07/12/31'
+order by salary desc
+limit 2,5
+;
+
+-- 2007년도 출력하는 방법들 -------------------------------------------
+-- 1) 원래 하던거
+select  *
+from employees
+where hire_date >= '07/01/01'
+and hire_date <= '07/12/31'
+order by salary desc
+;
+-- 2) between and
+select  first_name
+        ,hire_date
+from employees
+where hire_date between '2007-01-01' and '2007-12-31'
+order by hire_date asc
+;
+-- 3) date_format
+select  first_name
+        ,date_format(hire_date, '%Y')
+from employees
+where date_format(hire_date, '%Y') = '2007' -- 1907과 겹치는 오류가 있을 수 있으니 %Y로 출력
+order by hire_date desc
+;
+
+
+-- 부서번호가 100인 직원 중 급여를 가장 많이 받은 직원의 이름, 급여, 부서번호를 출력하세요 --------------------------------------
+select  max(salary)
+from employees
+where department_id = 100
+;
+select  first_name
+		,salary
+        ,department_id
+from employees
+where salary = (select max(salary)
+				from employees
+				where department_id = 100) 
+and department_id = 100
+;
+-- limit 사용으로 위 문제 풀기 : order by가 데이터를 많이 잡아먹기 때문에 좋은 방법은 아님 --------------------------------
+select  first_name
+		,salary
+        ,department_id
+from employees
+where department_id = 100
+order by salary desc
+limit 0, 1
+;
+

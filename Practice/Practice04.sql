@@ -9,6 +9,11 @@ from employees
 ;
 select count(*)
 from employees
+where salary < 6461.831776
+;
+
+select count(salary)
+from employees
 where salary < (select  avg(salary)
 				from employees)
 ;
@@ -19,8 +24,33 @@ where salary < (select  avg(salary)
 직원번호(employee_id), 이름(first_name), 월급(salary), 평균월급, 최대월급을 월급의 오름차순으로 정렬하여 출력하세요 
 (51건)
 */
-
-
+-- 평균월급, 최대월급 
+select  avg(Salary) -- 6461.831776
+		,max(salary) -- 24000.00
+from employees
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+from employees
+where salary >= 6461
+and salary <= 24000
+order by salary asc 
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+        ,round((select  avg(Salary)from employees), 0) as avgsalary
+        ,(select  max(salary)from employees) as maxsalary
+from employees 
+where salary >= any (select  avg(Salary)
+					from employees)
+and salary <=all (select  max(salary)
+				  from employees) 
+order by salary asc
+;
 
 /*
 문제3.
@@ -33,8 +63,11 @@ where salary < (select  avg(salary)
 
 /*
 문제4.
-job_id 가 'ST_MAN' 인 직원의 월급보다 작은 직원의 사번,이름,월급을 월급의 내림차순으로 출력하세요  -ANY연산자 사용
+job_id 가 'ST_MAN' 인 직원의 월급보다 작은 직원의 사번,이름,월급을 월급의 내림차순으로 출력하세요('ST_MAN' 직무의 최고급여 보다 작은직원의 의미)
+- ANY연산자 사용       
+- max()사용하지 말 것
 (74건)
+
 */
 
 
