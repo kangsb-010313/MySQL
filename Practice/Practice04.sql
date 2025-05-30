@@ -57,7 +57,26 @@ order by salary asc
 직원중 Steven(first_name) king(last_name)이 소속된 부서(departments)가 있는 곳의 주소를 알아보려고 한다.
 도시아이디(location_id), 거리명(street_address), 우편번호(postal_code), 도시명(city), 주(state_province), 나라아이디(country_id) 를 출력하세요
 (1건)
-*/
+*/ -- employees, departments, locations
+-- Stevenking 소속된 부서
+select  concat(e.first_name, e.last_name)
+		,d.department_name
+from employees e, departments d
+where e.department_id = d.department_id
+and concat(e.first_name, e.last_name) = 'StevenKing'
+;
+-- Executive 주소 (도시아이디, 거리명, 우편번호, 도시명, 주, 나라아이디)
+select  l.location_id
+		,l.street_address
+        ,l.postal_code
+        ,l.city
+        ,l.state_province
+        ,l.country_id
+from departments d, locations l
+where d.location_id = l.location_id
+and d.department_name = 'Executive'
+;
+-- 합치기
 
 
 
