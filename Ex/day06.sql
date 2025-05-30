@@ -203,7 +203,7 @@ and salary > 12008
 -- 2-2) all() 표현 -- 의미만 
 select *
 from employees
-where salary >all (8300, 12008) -- 의미만 이해하기
+-- where salary >all (8300, 12008) --> 의미만 이해하기
 ;
 
 -- 합치기 -> 2-2) 사용
