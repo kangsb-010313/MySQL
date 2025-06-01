@@ -59,8 +59,7 @@ order by salary asc
 (1건)
 */ -- employees, departments, locations
 -- Stevenking 소속된 부서
-select  concat(e.first_name, e.last_name)
-		,d.department_name
+select d.department_name
 from employees e, departments d
 where e.department_id = d.department_id
 and concat(e.first_name, e.last_name) = 'StevenKing'
@@ -77,7 +76,18 @@ where d.location_id = l.location_id
 and d.department_name = 'Executive'
 ;
 -- 합치기
-
+select  l.location_id
+		,l.street_address
+        ,l.postal_code
+        ,l.city
+        ,l.state_province
+        ,l.country_id
+from departments d, locations l
+where d.location_id = l.location_id
+and d.department_id =(select e.department_id
+						from employees e
+						where concat(e.first_name, e.last_name) = 'StevenKing')
+;
 
 
 /*
@@ -85,11 +95,31 @@ and d.department_name = 'Executive'
 job_id 가 'ST_MAN' 인 직원의 월급보다 작은 직원의 사번,이름,월급을 월급의 내림차순으로 출력하세요('ST_MAN' 직무의 최고급여 보다 작은직원의 의미)
 - ANY연산자 사용       
 - max()사용하지 말 것
-(74건)
-
+(74건) -- 78건으로 나옴
 */
-
-
+-- job_id가 'st_man'인 직원의 최대 월급 -- 8500
+select  max_salary
+from jobs
+where job_id = 'st_man'
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+from employees
+where salary < 8500
+order by salary desc
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+from employees
+where salary <any (select  max_salary
+				   from jobs
+				   where job_id = 'st_man')
+order by salary desc
+;
 
 /*
 문제5. 
@@ -98,6 +128,40 @@ job_id 가 'ST_MAN' 인 직원의 월급보다 작은 직원의 사번,이름,�
 조건절비교, 테이블조인 2가지 방법으로 작성하세요
 (11건)
 */
+-- 조건절 비교 ------------------------------------------------------------
+-- 
+select  department_id
+		,max(salary)
+from employees
+group by department_id
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+        ,department_id
+from employees
+where (department_id, salary) in ((90, 24000), (60, 9000), (100, 12008))
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+        ,department_id
+from employees
+where (department_id, salary) in (select  department_id
+										  ,max(salary)
+								  from employees
+								  group by department_id)
+order by salary desc
+;
+-- 테이블 조인 ------------------------------------------------------------
+
+
+
+
+
+
 
 
 
