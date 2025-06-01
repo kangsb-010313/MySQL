@@ -128,8 +128,9 @@ order by salary desc
 조건절비교, 테이블조인 2가지 방법으로 작성하세요
 (11건)
 */
+
 -- 조건절 비교 ------------------------------------------------------------
--- 
+-- 부서별 최고월급
 select  department_id
 		,max(salary)
 from employees
@@ -143,7 +144,7 @@ select  employee_id
 from employees
 where (department_id, salary) in ((90, 24000), (60, 9000), (100, 12008))
 ;
--- 
+-- 합치기
 select  employee_id
 		,first_name
         ,salary
@@ -155,14 +156,28 @@ where (department_id, salary) in (select  department_id
 								  group by department_id)
 order by salary desc
 ;
+
 -- 테이블 조인 ------------------------------------------------------------
-
-
-
-
-
-
-
+-- 부서별 최고월급 (가상테이블)
+select  department_id
+		,max(salary)
+from employees
+group by department_id
+;
+-- 합치기 
+select  e.employee_id
+		,e.first_name
+        ,e.salary
+        ,e.department_id
+from employees e
+inner join(select  department_id
+			 	   ,max(salary) maxSalary
+		   from employees
+		   group by department_id)d
+on e.department_id = d.department_id
+and e.salary = d.maxSalary
+order by e.salary desc
+;
 
 
 /*
