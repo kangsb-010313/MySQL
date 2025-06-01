@@ -188,19 +188,51 @@ order by e.salary desc
 */
 
 
-
 /*
 문제7.
 자신의 부서 평균 월급보다 월급(salary)이 많은 직원의 직원번호(employee_id), 이름(first_name)과 월급(salary)을 조회하세요 
 (38건)
 */
-
-
+-- 부서별 평균 월급
+select  department_id
+		,avg(salary)
+from employees
+group by department_id
+;
+-- 개인 부서아이디, 월급 
+select  first_name
+		,department_id
+        ,salary
+from employees
+;
+-- 
+select  employee_id
+		,first_name
+        ,salary
+from employees e
+where salary > (select  avg(salary)
+				from employees
+				where department_id = e.department_id)
+;
 
 /*
 문제8.
 직원 입사일이 11번째에서 15번째의 직원의 사번, 이름, 월급, 입사일을 입사일 순서로 출력하세요
 */
+-- 
+select hire_date
+from employees
+order by hire_date asc
+;
 
+-- 
+select  employee_id
+		,first_name
+        ,salary
+        ,hire_date
+from employees
+order by hire_date asc
+limit 10,5
+;
 
 
