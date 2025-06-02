@@ -28,12 +28,14 @@ rename table book to article;
 -- 테이블 삭제(조심)
 drop table article;
 
-
-
-
 select * from article; -- book에서 article로 테이블명 수정함
 
-
+-- 작가 테이블 만들기
+create table author(
+	author_id 		int 			primary key
+    ,author_name 	varchar(100) 	not null 
+    ,author_desc 	varchar(500) 	
+);
 
 
 
