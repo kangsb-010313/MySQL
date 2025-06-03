@@ -104,6 +104,7 @@ where book_id = 1
 ;
 
 -- 작가 박경리 삭제 안됨 	작가 번호 2번을 책(book테이블 데이터)에서 사용하고 있기 때문에 
+-- book_id 먼저 삭제 후 박경리 삭제(?)
 delete from author
 where author_id = 2
 ;
