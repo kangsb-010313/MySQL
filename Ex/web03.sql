@@ -1,6 +1,6 @@
--- ---------------------------------------------
--- web 계정 03 fk
--- ---------------------------------------------
+-- ----------------------------------------------------
+-- web 계정 - 03  fk
+-- ----------------------------------------------------
 
 -- 테이블 계정 삭제 --------------------------------------------
 -- 작가 테이블 삭제 
@@ -46,18 +46,8 @@ insert into author
 values(null, '이문열', '경북 영양');
 insert into author
 values(null, '박경리', '경상남도 통영');
-insert into author
-values();
-insert into author
-values();
-insert into author
-values();
-insert into author
-values();
-insert into author
-values();
 
-
+-- -------------------------------------------------------------------------------------
 
 -- 북 테이블 데이터 조회
 select *
@@ -76,14 +66,6 @@ values(null, '토지', '마로니에북스', '2012-08-15', 2);
 insert into book
 values(null, '유시민의 글쓰기 특강', '생각의길', '2015-04-01', 3); -- 오류 (아직 author에 3 안 만들었음)
 
-insert into book
-values();
-
-insert into book
-values();
-
-insert into book
-values();
 
 
 -- 전체조회
