@@ -39,10 +39,27 @@ select *
 from author
 ;
 -- book DAO-------------------------------------------------
-select  *
+select  book_id
+		,title
+        ,pubs
+        ,date_format(pub_date, '%Y-%m-%d') as pub_date
 from book
 ;
 
 
+select  b.book_id
+		,b.title
+        ,b.pubs
+        ,b.pub_date
+        ,a.author_id
+        ,a.author_name
+        ,a.author_desc
+from book b, author a
+where b.author_id = a.author_id
+;
+
+
+insert into book
+values(null, "책", "출판사", "날짜", 1);
 
 
