@@ -34,3 +34,15 @@ select  author_id
 from author
 where author_id = 4
 ;
+
+select *
+from author
+;
+-- book DAO-------------------------------------------------
+select  *
+from book
+;
+
+
+
+
