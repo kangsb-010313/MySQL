@@ -23,3 +23,14 @@ from book b, author a
 where b.author_id = a.author_id
 ;
 
+delete from author
+where author_id = 8
+;
+
+
+select  author_id
+		,author_name
+        ,author_desc
+from author
+where author_id = 4
+;
