@@ -5,7 +5,15 @@
 이름, 매니저아이디, 커미션 비율, 월급 을 출력하세요.
 (45건)
 */
-
+select  first_name
+		,manager_id
+        ,commission_pct
+        ,salary
+from employees
+where manager_id is not null
+and commission_pct is null
+and salary > 3000
+;
 
 /*
 문제2. 
@@ -17,7 +25,37 @@
 -전화번호는 515-123-4567 형식으로 출력합니다.
 (11건)
 */
+-- 각 부서별 최고 월급
+select  department_id
+		,max(salary)
+from employees
+group by department_id
+order by max(salary) desc
+;
 
+select  employee_id
+		,first_name
+        ,salary
+        ,concat(
+				date_format(hire_date, '%Y-%m-%d ')
+				,CASE date_format(hire_date, '%w') 
+					 WHEN '0' THEN '일요일'
+					 WHEN '1' THEN '월요일'
+                     WHEN '2' THEN '화요일'
+                     WHEN '3' THEN '수요일'
+                     WHEN '4' THEN '목요일'
+                     WHEN '5' THEN '금요일'
+                     WHEN '6' THEN '토요일'
+				 END
+                ) as 'hire_date'
+        ,replace(phone_number, '.', '-') as 'phone_number'
+        ,department_id
+from employees
+where salary in(select  max(salary)
+				from employees
+				group by department_id)
+order by salary desc
+;
 
 /*
 문제3

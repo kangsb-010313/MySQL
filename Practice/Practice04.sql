@@ -186,6 +186,22 @@ order by e.salary desc
 월급 총합이 가장 높은 업무부터 업무명(job_title)과 월급 총합을 조회하시오 
 (19건)
 */
+select  job_id
+		,sum(salary)
+from employees
+group by job_id
+order by sum(salary) desc
+;
+
+select  j.job_title
+		,e.sumSalary
+from jobs j, (select  job_id
+				 	  ,sum(salary) as sumSalary
+			  from employees
+			  group by job_id) e
+where j.job_id = e.job_id
+order by sumSalary desc
+;
 
 
 /*
