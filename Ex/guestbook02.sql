@@ -26,7 +26,11 @@ create table guestbook(
 );
 
 -- 테이블 조회 --------------------------------------------
-select *
+select  no 
+		,name
+        ,password 
+        ,content
+        ,reg_date
 from guestbook
 ;
 
@@ -35,10 +39,22 @@ insert into guestbook
 values(null, '강수빈', '1313', '안녕하시렵니까', now())
 ;
 
+insert into guestbook
+values(null, '정성찬', '2222', '안녕하세요', now())
+;
+
+insert into guestbook
+values(null, '이찬영', '3333', 'Hi~ 에이치아이~', now())
+;
+
+
 insert into guestbook(name, password, content, reg_date)
 values('강수빈', '1111', '안녕하수꽈', now())
 ;
 
+insert into guestbook(name, password, content)
+values('이름', '비밀번호', '내용')
+;
 
 -- 수정
 update guestbook
@@ -52,6 +68,6 @@ where no = ?
 
 -- 삭제
 delete from guestbook
-where no = ?
+where no = 4
 ;
 
