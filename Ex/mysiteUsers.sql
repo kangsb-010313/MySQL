@@ -7,12 +7,16 @@ use web_db;
 show tables;
 
 -- users 조회 
-select  *
+select  no
+		,id
+		,password 
+        ,name
+        ,gender
 from users
 ;
 
 -- !!!테이블 삭제!!! --------------------------------------------
-drop table users;
+drop table author;
 
 
 -- 테이블 등록
@@ -28,6 +32,20 @@ create table users(
 -- 등록 
 insert into users
 values(null, 'aaa', '1234', '강수빈', '여');
+
+-- 삭제 
+delete from users
+where no = 3
+;
+
+-- 수정
+update users
+set id = ?
+	,password = ?
+    ,name = ?
+    ,gender = ?
+where no = ?
+;
 
 -- 전체 조회
 select *
