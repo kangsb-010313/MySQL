@@ -16,7 +16,7 @@ from users
 ;
 
 -- !!!테이블 삭제!!! --------------------------------------------
-drop table author;
+-- drop table author;
 
 
 -- 테이블 등록
@@ -26,16 +26,16 @@ create table users(
     ,id			varchar(20) 		unique			not null
     ,password	varchar(20)			not null
     ,name		varchar(20)
-    ,gender 	varchar(10)
+    ,gender 	varchar(10)			-- male female
 );
 
 -- 등록 
 insert into users
-values(null, 'aaa', '1234', '강수빈', '여');
+values(null, 'aaa', '123', '강수빈', '여');
 
 -- 삭제 
 delete from users
-where no = 3
+where no = 20
 ;
 
 -- 수정
@@ -47,7 +47,19 @@ set id = ?
 where no = ?
 ;
 
--- 전체 조회
+-- 로그인 
 select *
+from users
+where id = 'aaa'
+and password = '123'
+;
+
+
+-- users 전체 조회 
+select  no
+		,id
+		,password 
+        ,name
+        ,gender
 from users
 ;
