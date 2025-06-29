@@ -54,6 +54,13 @@ where id = 'aaa'
 and password = '123'
 ;
 
+-- 수정
+update users
+set password = ''
+	,name =''
+    ,gender = ''
+where id = ''
+;
 
 -- users 전체 조회 
 select  no
