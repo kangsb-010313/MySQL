@@ -35,7 +35,7 @@ values(null, 'aaa', '123', '강수빈', '여');
 
 -- 삭제 
 delete from users
-where no = 20
+where no = 5
 ;
 
 -- 수정
@@ -54,13 +54,6 @@ where id = 'aaa'
 and password = '123'
 ;
 
--- 수정
-update users
-set password = ''
-	,name =''
-    ,gender = ''
-where id = ''
-;
 
 -- users 전체 조회 
 select  no
@@ -69,4 +62,25 @@ select  no
         ,name
         ,gender
 from users
+;
+
+-- 로그인
+select  no
+		,id
+		,password 
+        ,name
+        ,gender
+from users
+where id = ''
+and password = ''
+;
+
+-- 회원정보 수정폼
+select  no
+        ,id
+        ,password
+        ,name
+        ,gender
+from users
+where no = 1
 ;
