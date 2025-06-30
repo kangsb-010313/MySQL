@@ -67,7 +67,9 @@ insert into board
 values(null, 12, '두번째 게시물제목', '두번재 게시물내용', 0, now())
 ;
 
-
+insert into board(title, content)
+values('', '')
+;
 
 -- 수정
 update board
