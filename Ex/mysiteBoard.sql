@@ -60,36 +60,25 @@ from users
 
 -- 등록
 insert into board
-values(null, 30, '첫번째 게시물제목', '첫번재 게시물내용', 0, now())
+values(null, 11, '첫번째 게시물제목', '첫번재 게시물내용', 0, now())
 ;
 
 insert into board
-values(null, 31, '두번째 게시물제목', '두번재 게시물내용', 0, now())
-;
-
-insert into board
-values(null, '이찬영', '3333', 'Hi~ 에이치아이~', now())
+values(null, 12, '두번째 게시물제목', '두번재 게시물내용', 0, now())
 ;
 
 
-insert into board(name, password, content, reg_date)
-values('강수빈', '1111', '안녕하수꽈', now())
-;
-
-insert into board(name, password, content)
-values('이름', '비밀번호', '내용')
-;
 
 -- 수정
 update board
 set 
-where no = ?
+where no = 1
 ;
 
 
 
 -- 삭제
 delete from board
-where no = 4
+where no = 2
 ;
 
