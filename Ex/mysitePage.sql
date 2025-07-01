@@ -20,18 +20,18 @@ from board
 
 
  
-listcnt = 10 한페이지에 출력되는 갯수
+-- listcnt = 10 한페이지에 출력되는 갯수
 
-crtPage 1 --> 0, 10
-crtPage 2 --> 10, 10
-crtPage 3 --> 20, 10
+-- crtPage 1 --> 0, 10
+-- crtPage 2 --> 10, 10
+-- crtPage 3 --> 20, 10
 
-시작글번호 = (crtPage-1)*listCnt
-		  (1-1)*10 --> 10 0
-          (2-1)*10 --> 20 10
-          (3-1)*10 --> 30 20
-          
-(시작글번호=(crtPage-1)*listCnt listCnt)
+-- 시작글번호 = (crtPage-1)*listCnt
+-- 		  (1-1)*10 --> 10 0
+--           (2-1)*10 --> 20 10
+--           (3-1)*10 --> 30 20
+--           
+-- (시작글번호=(crtPage-1)*listCnt listCnt)
 
 
 -- 1 (0 ~ 10)
