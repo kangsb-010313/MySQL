@@ -16,7 +16,7 @@ from users
 ;
 
 -- !!!테이블 삭제!!! --------------------------------------------
--- drop table author;
+drop table users;
 
 
 -- 테이블 등록
