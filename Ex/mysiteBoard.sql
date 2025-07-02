@@ -41,19 +41,8 @@ select  b.no
         ,u.name userName
 from users u, board b
 where u.no = b.user_no
+order by b.no asc
 ;
-
--- 게시물 보기
-select  u.name userName
-		,b.hit
-        ,date_format(b.reg_date, "%Y-%m-%d")regDate
-        ,b.title
-        ,b.content
-from users u, board b
-where u.no = b.user_no
-;
-
-
 
 
 insert into board values(null, 1, '1번째 게시물제목', '1번째 게시물내용', 0, now());
@@ -286,6 +275,6 @@ where no = 1
 
 -- 삭제
 delete from board
-where no = 3
+where no = 189
 ;
 
