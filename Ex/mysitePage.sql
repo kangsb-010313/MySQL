@@ -18,13 +18,43 @@ from board
 ;
 
 
-select count(*)
+select *
 from board
 where title like '%12%'
 ;
 
+select *
+from board
+where title like '%12%'
+limit 0, 10
+;
 
+select  b.no
+		,b.title
+		,b.content
+		,b.hit
+		,date_format(b.reg_date, "%Y-%m-%d") regDate
+		,u.no userNo
+		,u.name userName
+from users u, board b
+where u.no = b.user_no
+order by b.no asc
+limit #{startRowNo}, #{listCnt}
+;
 
+select  b.no
+		,b.title
+		,b.content
+		,b.hit
+		,date_format(b.reg_date, "%Y-%m-%d") regDate
+		,u.no userNo
+		,u.name userName
+from users u, board b
+where u.no = b.user_no
+and title like '%12%'
+order by b.no asc
+limit 0, 10
+;
 
 
 
