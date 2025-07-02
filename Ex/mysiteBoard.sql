@@ -267,8 +267,9 @@ values('', '')
 
 -- 수정
 update board
-set 
-where no = 1
+set title=''
+	,content=''
+where no = ?
 ;
 
 
