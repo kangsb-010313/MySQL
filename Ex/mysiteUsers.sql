@@ -35,7 +35,7 @@ values(null, 'aaa', '123', '강수빈', '여');
 
 -- 삭제 
 delete from users
-where no = 7
+where no = 4
 ;
 
 -- 수정
