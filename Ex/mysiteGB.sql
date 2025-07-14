@@ -72,6 +72,6 @@ where no = ?
 
 -- 삭제
 delete from guestbook
-where no = 29
+where no = 54
 ;
 
