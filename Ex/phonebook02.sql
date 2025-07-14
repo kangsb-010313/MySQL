@@ -35,15 +35,15 @@ order by person_id desc
 
 -- 등록
 insert into person
-values(null, '정성찬', '010-1111-1111', '02-1111-1111')
+values(null, '강호동', '010-1111-1111', '02-1111-1111')
 ;
 
 insert into person
-values(null, '이찬영', '010-2222-2222', '02-2222-2222')
+values(null, '정우성', '010-1111-1111', '02-1111-1111')
 ;
 
 insert into person
-values(null, '박원빈', '010-3333-3333', '02-3333-3333')
+values(null, '테스트이름', '010-1234-5678', '02-123-4567')
 ;
 
 -- 수정
