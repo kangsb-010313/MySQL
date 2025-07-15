@@ -32,11 +32,12 @@ create table gallery(
 -- ----------------------------------------------
 -- files 전체 조회
 select  no
-		,org_name
-        ,ex_name
-        ,save_name
-        ,file_path
-        ,file_size
+		,user_no
+        ,content
+        ,filePath
+        ,orgName
+        ,saveName
+        ,fileSize
 from gallery
 ;
 
