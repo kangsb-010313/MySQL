@@ -41,14 +41,28 @@ select  no
 from gallery
 ;
 
+-- files, users 전체 조회
+select  g.no
+		,u.no as userNo
+        ,u.name as userName
+        ,g.content
+        ,g.filePath
+        ,g.orgName
+        ,g.saveName
+        ,g.fileSize
+from gallery g
+inner join users u on g.user_no = u.no 
+order by g.no desc
+;
+
 -- 등록 
 insert into gallery
-values();
+values(null, 1, '', '', '', '', 87654);
 
 -- 삭제 
 delete from gallery
-where no = ?
+where no = 10
+and user_no = 2
 ;
 
--- 수정 
 
